@@ -1,33 +1,38 @@
 import m from 'mithril'
 
-import yt from './clients/yt'
+import config from './config'
+import routes from './routes'
 
-const root = document.body
+import { initUser, updateSigninStatus } from './models/User'
 
-const App = {
-  view: () => {
-    return m('main', [
-      m('h1', 'Music Findr'),
-      m(
-        'button',
-        {
-          onclick: function () {
-            yt.signIn()
-          }
-        },
-        'Sign in with Youtube'
-      ),
-      m(
-        'button',
-        {
-          onclick: function () {
-            yt.signOut()
-          }
-        },
-        'Sign out'
-      )
-    ])
-  }
+function loadApp () {
+  const root = document.getElementById('app')
+  m.route(root, '/', routes)
 }
 
-m.mount(root, App)
+window.onload = function () {
+  window.gapi.load('client:auth2', () => {
+    window.gapi.client
+      .init({
+        discoveryDocs: config.DISCOVERY_DOCS,
+        clientId: config.CLIENT_ID,
+        scope: config.SCOPES
+      })
+      .then(() => {
+        // Listen for sign-in state changes.
+        window.gapi.auth2
+          .getAuthInstance()
+          .isSignedIn.listen(updateSigninStatus)
+
+        // Handle the initial sign-in state.
+        updateSigninStatus(
+          window.gapi.auth2.getAuthInstance().isSignedIn.get()
+        )
+
+        initUser(window.gapi.auth2.getAuthInstance())
+
+        // Start app when GAPI is init'd
+        loadApp()
+      })
+  })
+}
