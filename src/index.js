@@ -5,6 +5,8 @@ import routes from './routes'
 
 import { initUser, updateSigninStatus } from './models/User'
 
+import './styles.css'
+
 function loadApp () {
   const root = document.getElementById('app')
   m.route(root, '/', routes)
