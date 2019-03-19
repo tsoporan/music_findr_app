@@ -1,0 +1,13 @@
+/*
+ * Load all tailwind first
+ */
+
+@tailwind preflight;
+
+@tailwind components;
+
+@tailwind utilities;
+
+/*
+ * Custom css
+ */
