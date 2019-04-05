@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.4.3",
     "mithril": "^2.0.0-rc.4"
   },
   "devDependencies": {
