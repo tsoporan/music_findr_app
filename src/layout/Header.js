@@ -2,7 +2,7 @@ import m from 'mithril'
 
 import { User, signIn, signOut } from '../models/User'
 
-import { PrimaryButton } from '../components/buttons'
+import { PrimaryButton } from '../components/Button'
 
 function Header (initialVnode) {
   return {

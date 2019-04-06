@@ -1,7 +1,29 @@
 import m from 'mithril'
 
-export default {
+import CardList from '../components/CardList'
+
+import { getSubscriptions } from '../api/yt'
+
+import { User } from '../models/User'
+
+const Landing = {
+  oninit: async vnode => {
+    await getSubscriptions(User)
+    m.redraw()
+  },
+
   view (vnode) {
-    return m('div', {}, 'Landing content')
+    const { loading, subscriptions } = User
+
+    return m(
+      'div',
+      loading
+        ? 'Loading ...'
+        : m(CardList, {
+          items: subscriptions
+        })
+    )
   }
 }
+
+export default Landing
