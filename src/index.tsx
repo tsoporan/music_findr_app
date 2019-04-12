@@ -1,4 +1,4 @@
-import m from 'mithril'
+import * as m from 'mithril'
 
 import config from './config'
 import routes from './routes'
@@ -13,8 +13,10 @@ function loadApp () {
 }
 
 window.onload = function () {
-  window.gapi.load('client:auth2', () => {
-    window.gapi.client
+  const gapi = window['gapi']
+
+  gapi.load('client:auth2', () => {
+    gapi.client
       .init({
         discoveryDocs: config.DISCOVERY_DOCS,
         clientId: config.CLIENT_ID,
@@ -22,16 +24,16 @@ window.onload = function () {
       })
       .then(() => {
         // Listen for sign-in state changes.
-        window.gapi.auth2
+        gapi.auth2
           .getAuthInstance()
           .isSignedIn.listen(updateSigninStatus)
 
         // Handle the initial sign-in state.
         updateSigninStatus(
-          window.gapi.auth2.getAuthInstance().isSignedIn.get()
+          gapi.auth2.getAuthInstance().isSignedIn.get()
         )
 
-        initUser(window.gapi.auth2.getAuthInstance())
+        initUser(gapi.auth2.getAuthInstance())
 
         // Start app when GAPI is init'd
         loadApp()
