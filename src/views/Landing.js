@@ -4,7 +4,7 @@ import CardList from '../components/CardList'
 
 import { loadSubscriptions } from '../api/yt'
 
-import { User } from '../models/User'
+import User from '../models/User'
 
 const Landing = {
   oninit: async vnode => {

@@ -1,11 +1,21 @@
 import m from 'mithril'
 
-function FooterComponent (initialVnode) {
+function Footer (initialVnode) {
   return {
     view: () => {
-      return m('footer', {}, 'Footer')
+      const year = new Date().getFullYear()
+
+      return m('footer', [
+        m(
+          'p',
+          {
+            class: 'text-center text-sm'
+          },
+          year
+        )
+      ])
     }
   }
 }
 
-export default FooterComponent
+export default Footer

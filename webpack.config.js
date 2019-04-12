@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
 
-  entry: ['@babel/polyfill', './src/index.tsx'],
+  entry: ['@babel/polyfill', './src/index.ts'],
 
   // Enable source maps for debugging
   devtool: 'source-map',
@@ -15,8 +15,8 @@ module.exports = {
   },
 
   resolve: {
-    // Add .ts and .tsx as resolvable extensions
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    // Add .ts as resolvable extensions
+    extensions: ['.ts', '.js', '.json']
   },
 
   module: {
@@ -26,7 +26,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(t|j)sx?$/,
+        test: /\.(t|j)s?$/,
         loader: 'awesome-typescript-loader'
       },
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
