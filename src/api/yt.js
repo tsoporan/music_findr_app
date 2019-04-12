@@ -2,12 +2,13 @@
  * Wrapper around YT JS API
  */
 
-async function getSubscriptions (
+async function loadSubscriptions (
   User,
   params = {
     part: 'snippet',
     mine: true,
-    maxResults: 50
+    maxResults: 50,
+    pageToken: ''
   }
 ) {
   User.loading = true
@@ -15,16 +16,16 @@ async function getSubscriptions (
   const resp = await User.client.subscriptions.list(params)
   const { items, nextPageToken } = resp.result
 
-  if (!items || !items.length > 0) {
-    return []
+  if (items && items.length > 0) {
+    User.subscriptions = User.subscriptions.concat(items)
   }
 
-  // TODO: Paged results, retrieve next set
+  // Load next set of results
   if (nextPageToken) {
+    await loadSubscriptions(User, { ...params, pageToken: nextPageToken })
+  } else {
+    User.loading = false
   }
-
-  User.loading = false
-  User.subscriptions = items
 }
 
-export { getSubscriptions }
+export { loadSubscriptions }

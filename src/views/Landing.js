@@ -2,13 +2,13 @@ import m from 'mithril'
 
 import CardList from '../components/CardList'
 
-import { getSubscriptions } from '../api/yt'
+import { loadSubscriptions } from '../api/yt'
 
 import { User } from '../models/User'
 
 const Landing = {
   oninit: async vnode => {
-    await getSubscriptions(User)
+    await loadSubscriptions(User)
     m.redraw()
   },
 
