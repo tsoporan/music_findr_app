@@ -1,6 +1,13 @@
+/*
+ * User model
+ */
+
 const User = {
   isAuthed: false,
-  current: null
+  current: null,
+  client: null,
+  loading: false,
+  subscriptions: []
 }
 
 function signIn (evt) {
@@ -14,15 +21,19 @@ function signIn (evt) {
       name: userDetails.ig,
       email: userDetails.U3
     }
+    User.client = window.gapi.client.youtube
   })
 }
 
 function signOut (evt) {
   const authInstance = window.gapi.auth2.getAuthInstance()
 
+  console.log('logging out', authInstance)
+
   return authInstance.signOut().then(() => {
     User.isAuthed = false
     User.current = null
+    User.client = null
   })
 }
 
@@ -42,6 +53,7 @@ function initUser (authInstance) {
       name: userDetails.ig,
       email: userDetails.U3
     }
+    User.client = window.gapi.client.youtube
   }
 }
 
