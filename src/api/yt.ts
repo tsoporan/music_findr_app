@@ -20,7 +20,7 @@ async function loadSubscriptions(
 ) {
   User.subscriptions.loading = true;
 
-  const resp = await User.client.subscriptions.list(params);
+  const resp = await User.youtube.subscriptions.list(params);
   const { items, nextPageToken } = resp.result;
 
   if (items && items.length > 0) {

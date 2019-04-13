@@ -11,10 +11,11 @@ const User = {
     loading: false,
     items: []
   },
-  _client: null, // Store a reference to the authed client
+  gapi: null, // Store a reference to the authed client
+  youtube: null, // Convenience to the YT endpoint
 
   signIn(): any {
-    const authInstance = this._client && this._client.auth2.getAuthInstance();
+    const authInstance = this.gapi && this.gapi.auth2.getAuthInstance();
     console.log("Sign in", authInstance);
 
     return (
@@ -30,7 +31,7 @@ const User = {
   },
 
   signOut(): any {
-    const authInstance = this._client && this._client.auth2.getAuthInstance();
+    const authInstance = this.gapi && this.gapi.auth2.getAuthInstance();
     console.log("Sign out", authInstance);
 
     return (
@@ -59,7 +60,8 @@ const User = {
       this.email = userDetails.U3;
     }
 
-    this._client = gapi;
+    this.gapi = gapi;
+    this.youtube = gapi.client.youtube;
   }
 };
 

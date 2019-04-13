@@ -13,14 +13,14 @@ const Landing = {
   },
 
   view() {
-    const { loading, subscriptions } = User;
+    const { loading, items } = User.subscriptions;
 
     return m(
       "div",
       loading
         ? "Loading ..."
         : m(CardList, {
-            items: subscriptions
+            items
           })
     );
   }
