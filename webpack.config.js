@@ -27,7 +27,8 @@ module.exports = {
       },
       {
         test: /\.(t|j)s?$/,
-        loader: 'awesome-typescript-loader'
+        loader: 'awesome-typescript-loader',
+        exclude: /node_modules/
       },
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
     ]

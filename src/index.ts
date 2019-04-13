@@ -1,4 +1,4 @@
-import * as m from "mithril";
+import m from "mithril";
 
 import config from "./config";
 import routes from "./routes";
@@ -9,7 +9,10 @@ import "./styles.css";
 
 function loadApp() {
   const root = document.getElementById("app");
-  m.route(root, "/", routes);
+
+  if (root) {
+    m.route(root, "/", routes);
+  }
 }
 
 window.onload = function() {

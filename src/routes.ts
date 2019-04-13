@@ -2,7 +2,7 @@
  * Routes
  */
 
-import * as m from "mithril";
+import m from "mithril";
 
 import Layout from "./layout/Layout";
 

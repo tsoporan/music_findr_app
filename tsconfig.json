@@ -7,7 +7,9 @@
     "noUnusedParameters": true,
     "module": "es6",
     "target": "es6",
-    "allowJs": true
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "./src/**/*"

@@ -13,7 +13,7 @@ const User = {
   },
   _client: null, // Store a reference to the authed client
 
-  signIn(): void {
+  signIn(): any {
     const authInstance = this._client && this._client.auth2.getAuthInstance();
     console.log("Sign in", authInstance);
 
@@ -29,7 +29,7 @@ const User = {
     );
   },
 
-  signOut(): void {
+  signOut(): any {
     const authInstance = this._client && this._client.auth2.getAuthInstance();
     console.log("Sign out", authInstance);
 
